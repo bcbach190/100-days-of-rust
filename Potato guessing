@@ -1,36 +1,38 @@
 use std::io;
-use std::cmp::Ordering;
+use std::cmp::Ordering; //all the needed directories or libraries
 use rand::Rng;
 
 fn main() {
     println!("How many potato u eat in a day");
     println!("TELL ME QUICK ME BROTHER.");
-    let secret_no = rand::thread_rng().gen_range(1..=100);
+    let secret_no = rand::thread_rng().gen_range(1..=100);// This is the variable that holds the value of the secret number
+
     
     
-    loop {
+    loop {// this loop is made so the user will have multiple chances to guess
 
        
-        let mut guess = String::new();
+        let mut guess = String::new();// The variable that holds the input of the user as a string(this was the default data type)
 
         io::stdin()
             .read_line(&mut guess)
-            .expect("SHIT SOMETHING WENT WRONG");
+            .expect("SOMETHING WENT WRONG");// This is what asks the user for input and in the case of an error it sends the following message
 
     
-        let guess : u32 = match guess.trim().parse(){
-            Ok(num) => num,
+        let guess : u32 = match guess.trim().parse(){//Match is basically an if-else statement. This turns the input that is stored in guess into a integer. 
+            Ok(num) => num,                          // After the data type is changed it checks if the is valid and if the input is invalid it will continue
             Err(_) => continue,
         };
 
-        println!("You,guessed: {}", guess);
+        println!("You,guessed: {}", guess);// {} is a placeholder for the variable guess
 
         match guess.cmp(&secret_no) {
             Ordering::Less => println!("more POTATO"),
-            Ordering::Greater => println!("too much POTATO"),
+            Ordering::Greater => println!("too much POTATO"),// gives hints to hte user and checks if the guess is correct
             Ordering::Equal => {
-                    println!("WiTcH CrAfT BURN HER/HIM");
+                    println!("WiTcH CrAfT BURN HER/HIM");// if the guess is correct the loop will terminate
                     break;
                 }
         }
     }
+}
